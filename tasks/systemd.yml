@@ -1,0 +1,15 @@
+---
+
+- name: Install the sidekiq.service file
+  template: src=sidekiq.service.j2 dest=/etc/systemd/system/sidekiq.service owner=root group=root mode=0644
+  register: sidekiq_service
+
+- name: Ensure systemd is reloaded if sidekiq.service has changed
+  command: systemctl daemon-reload
+  when: sidekiq_service|changed
+
+- name: Start for first time and enable the sidekiq service
+  service: name=sidekiq state=started enabled=yes
+
+- name: Install the sudoers file that will allow sidekiq_user to stop/start sidekiq
+  template: src=sudoers_sidekiq.xenial.j2 dest=/etc/sudoers.d/{{ sidekiq_user }}_sidekiq owner=root group=root mode=0440

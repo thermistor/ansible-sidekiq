@@ -1,0 +1,8 @@
+---
+
+- include: upstart.yml
+  when: "'{{ ansible_distribution_release }}' == 'trusty'"
+
+- include: systemd.yml
+  when: "'{{ ansible_distribution_release }}' == 'xenial'"
+
