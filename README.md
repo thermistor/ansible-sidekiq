@@ -12,7 +12,8 @@ Example usage:
       tags:
         - sidekiq
 
-you can also specify the queues if not using a `sidekiq.conf`:
+You can also specify the queues. This will create command-line args that
+override a `config/sidekiq.yml` if present in the app:
 
     - role: thermistor.sidekiq
       sidekiq_queues:
