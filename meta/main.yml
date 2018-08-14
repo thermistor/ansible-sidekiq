@@ -4,7 +4,7 @@ galaxy_info:
   description: Configure sidekiq
   company: Netsign
 
-  license: license (MIT)
+  license: MIT
 
   min_ansible_version: 1.2
 
