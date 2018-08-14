@@ -24,7 +24,7 @@ After=syslog.target network.target redis.service
 [Service]
 Type=simple
 WorkingDirectory={{ sidekiq_dir }}
-ExecStart={{ sidekiq_dir }}/bin/bundle exec sidekiq -e {{ env }}{% for q in sidekiq_queues %}{{ " -q %s"|format(q) }}{% endfor %}
+ExecStart={{ sidekiq_dir }}/bin/bundle exec sidekiq -e {{ env }}{%+ for q in sidekiq_queues %}{{ " -q %s"|format(q) }}{% endfor %}
 User={{ sidekiq_user }}
 Group={{ sidekiq_user }}
 UMask=0002
