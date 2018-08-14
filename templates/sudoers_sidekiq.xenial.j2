@@ -1,1 +1,1 @@
-{{ sidekiq_user }} ALL=NOPASSWD: /bin/systemctl restart sidekiq, /bin/systemctl stop sidekiq, /bin/systemctl start sidekiq
+{{ sidekiq_user }} ALL=NOPASSWD: /bin/systemctl restart sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}, /bin/systemctl stop sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}, /bin/systemctl start sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}

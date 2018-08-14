@@ -1,5 +1,6 @@
 ---
 sidekiq_user: deploy
-sidekiq_dir: null
+sidekiq_dir: ~
 sidekiq_concurrency: 5
 sidekiq_queues: []
+sidekiq_instance: ~
