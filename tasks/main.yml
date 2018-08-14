@@ -2,4 +2,3 @@
 
 - include: systemd.yml
   when: ansible_distribution_release == 'xenial'
-
