@@ -12,4 +12,4 @@
   service: name=sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %} state=started enabled=yes
 
 - name: Install the sudoers file that will allow sidekiq_user to stop/start sidekiq
-  template: src=sudoers_sidekiq.xenial.j2 dest=/etc/sudoers.d/{{ sidekiq_user }}_sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %} owner=root group=root mode=0440
+  template: src=sudoers_sidekiq.j2 dest=/etc/sudoers.d/{{ sidekiq_user }}_sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %} owner=root group=root mode=0440
