@@ -1,14 +1,34 @@
 # Ansible role for sidekiq
 
-This sets up sidekiq systemctl service on ubuntu xenial.
+This sets up sidekiq systemctl service on ubuntu.
+
+## Dependencies
+
+You need redis to run sidekiq. Just installing the package on ubuntu is sufficient.
+
+## Vars
+
+### Vars that must be set
+
+    sidekiq_dir
+    sidekiq_env
+    sidekiq_user
+
+### Vars with defaults that you can override
+
+    sidekiq_queues: []
+    sidekiq_instance: ~
+
+Note use `RAILS_MAX_THREADS` ENV to set concurrency.
 
 ## Example playbook
 
 Example usage:
 
     - role: thermistor.sidekiq
-      sidekiq_user: beep
       sidekiq_dir: /srv/www/beep.eco/beep
+      sidekiq_env: production
+      sidekiq_user: beep
       tags:
         - sidekiq
 
@@ -19,8 +39,9 @@ override a `config/sidekiq.yml` if present in the app:
       sidekiq_queues:
         - mailers
         - default
-      sidekiq_user: beep
       sidekiq_dir: /srv/www/beep.eco/beep
+      sidekiq_env: production
+      sidekiq_user: beep
       tags:
         - sidekiq
 
@@ -32,16 +53,18 @@ name for each runner:
       sidekiq_instance: mailers
       sidekiq_queues:
         - mailers
-      sidekiq_user: beep
       sidekiq_dir: /srv/www/beep.eco/beep
+      sidekiq_env: production
+      sidekiq_user: beep
       tags:
         - sidekiq
     - role: thermistor.sidekiq
       sidekiq_instance: default
       sidekiq_queues:
         - default
-      sidekiq_user: beep
       sidekiq_dir: /srv/www/beep.eco/beep
+      sidekiq_env: production
+      sidekiq_user: beep
       tags:
         - sidekiq
 
