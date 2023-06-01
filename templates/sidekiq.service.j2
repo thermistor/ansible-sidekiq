@@ -35,11 +35,11 @@ UMask=0002
 RestartSec=1
 Restart=on-failure
 
-# output goes to /var/log/syslog
-StandardOutput=syslog
-StandardError=syslog
+# log to our own file
+StandardOutput=append:/var/log/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
+StandardError=append:/var/log/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
 
-# This will default to "bundler" if we don't specify it
+# Can view logs with 'journalctl -u sidekiq' or log files
 SyslogIdentifier=sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}
 
 [Install]
