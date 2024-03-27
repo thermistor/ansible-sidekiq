@@ -1,0 +1,10 @@
+{{ sidekiq_log_dir }}/*.log {
+  daily
+  missingok
+  rotate {{ sidekiq_logrotate_rotations }}
+  compress
+  delaycompress
+  copytruncate
+  notifempty
+  create 0644 {{ sidekiq_user }} {{ sidekiq_group }}
+}

@@ -19,6 +19,12 @@
     state: started
     enabled: yes
 
+- name: Restart service if sidekiq.service has changed
+  service:
+    name: sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}
+    state: restarted
+  when: sidekiq_service is changed
+
 - name: Install the sudoers file that will allow sidekiq_user to stop/start sidekiq
   template:
     src: sudoers_sidekiq.j2

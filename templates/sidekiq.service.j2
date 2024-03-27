@@ -36,8 +36,8 @@ RestartSec=1
 Restart=on-failure
 
 # log to our own file
-StandardOutput=append:/var/log/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
-StandardError=append:/var/log/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
+StandardOutput=append:/var/log/sidekiq/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
+StandardError=append:/var/log/sidekiq/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.log
 
 # Can view logs with 'journalctl -u sidekiq' or log files
 SyslogIdentifier=sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}

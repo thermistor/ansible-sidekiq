@@ -4,5 +4,9 @@
 # sidekiq_env:
 # sidekiq_dir:
 
+sidekiq_group: "{{ sidekiq_user }}"
 sidekiq_queues: []
 sidekiq_instance: ~
+sidekiq_logrotate_rotations: 50
+sidekiq_log_dir: /var/log/sidekiq
+sidekiq_log_file: "{{ acme_sh_log_dir }}/acme.sh.log"
