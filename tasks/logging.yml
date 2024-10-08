@@ -1,16 +1,16 @@
 ---
 - name: Ensure sidekiq log directory exists
-  file:
+  ansible.builtin.file:
     path: "{{ sidekiq_log_dir }}"
     owner: "{{ sidekiq_user }}"
     group: "{{ sidekiq_group }}"
-    mode: 0755
+    mode: '0755'
     state: directory
 
 - name: Install logrotate config for sidekig logs
-  template:
+  ansible.builtin.template:
     src: sidekiq_logrotate.j2
     dest: /etc/logrotate.d/sidekiq
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'

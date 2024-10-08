@@ -1,3 +1,7 @@
 ---
-- include_tasks: logging.yml
-- include_tasks: systemd.yml
+
+- name: Import logging tasks
+  ansible.builtin.import_tasks: logging.yml
+
+- name: Import systemd tasks
+  ansible.builtin.import_tasks: systemd.yml

@@ -1,19 +1,19 @@
 ---
 galaxy_info:
   role_name: sidekiq
+  namespace: thermistor
   author: Weston Triemstra
   description: Configure sidekiq
   company: Netsign
 
   license: MIT
 
-  min_ansible_version: 1.2
+  min_ansible_version: '2.16'
 
   platforms:
     - name: Ubuntu
       versions:
-        - xenial
-        - bionic
+        - jammy
 
   galaxy_tags:
     - sidekiq
