@@ -3,33 +3,27 @@
 - name: Install the sidekiq.service file
   ansible.builtin.template:
     src: sidekiq.service.j2
-    dest: /etc/systemd/system/sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}.service
+    dest: /etc/systemd/system/sidekiq{% if sidekiq_instance %}_{{ sidekiq_instance }}{% endif %}.service
     owner: root
     group: root
     mode: '0644'
-  register: sidekiq_service
+  notify:
+    - Restart sidekiq
 
-- name: Ensure systemd is reloaded if sidekiq.service has changed
-  ansible.builtin.systemd_service:
-    daemon_reload: true
-  when: sidekiq_service is changed
+# Restarting here also does the first start on a fresh install
+- name: Reload systemd and restart sidekiq now if sidekiq.service has changed
+  ansible.builtin.meta: flush_handlers
 
-- name: Start for first time and enable the sidekiq service
+- name: Start and enable the sidekiq service
   ansible.builtin.service:
-    name: sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}
+    name: sidekiq{% if sidekiq_instance %}_{{ sidekiq_instance }}{% endif %}
     state: started
     enabled: true
-
-- name: Restart service if sidekiq.service has changed
-  ansible.builtin.service:
-    name: sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}
-    state: restarted
-  when: sidekiq_service is changed
 
 - name: Install the sudoers file that will allow sidekiq_user to stop/start sidekiq
   ansible.builtin.template:
     src: sudoers_sidekiq.j2
-    dest: /etc/sudoers.d/{{ sidekiq_user }}_sidekiq{% if sidekiq_instance %}_{{sidekiq_instance}}{% endif %}
+    dest: /etc/sudoers.d/{{ sidekiq_user }}_sidekiq{% if sidekiq_instance %}_{{ sidekiq_instance }}{% endif %}
     owner: root
     group: root
     mode: '0440'

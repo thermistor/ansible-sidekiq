@@ -1,0 +1,7 @@
+---
+
+- name: Restart sidekiq
+  ansible.builtin.systemd_service:
+    name: sidekiq{% if sidekiq_instance %}_{{ sidekiq_instance }}{% endif %}
+    state: restarted
+    daemon_reload: true
